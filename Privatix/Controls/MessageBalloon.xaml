@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Privatix.Controls.MessageBalloon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             Width="Auto"
+             Height="Auto"
+             mc:Ignorable="d" 
+             d:DesignHeight="80"
+             d:DesignWidth="300">
+    <Border Background="#FAFAFA" CornerRadius="10" BorderBrush="Black" BorderThickness="1">
+        <Grid>
+            <TextBlock x:Name="tbText" Margin="20,20,20,20" Foreground="Black" FontWeight="Bold" FontFamily="Segoe UI Semibold"
+                       IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" LineHeight="16" FontSize="16" 
+                       TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Cursor="Hand" Text="Buy Premium"
+                       MouseLeftButtonDown="tbText_MouseLeftButtonDown">
+            </TextBlock>
+        </Grid>
+    </Border>
+</UserControl>

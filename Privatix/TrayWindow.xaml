@@ -1,0 +1,30 @@
+﻿<Window x:Class="Privatix.TrayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tn="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
+        Title="TrayWindow" Height="30" Width="30">
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="MenuTPL">
+            <StackPanel Background="WhiteSmoke"/>
+        </ItemsPanelTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <tn:TaskbarIcon x:Name="tiTaskbarIcon" IconSource="res/grey16.ico" ToolTipText="Privatix" TrayMouseDoubleClick="tiTaskbarIcon_TrayMouseDoubleClick">
+            <tn:TaskbarIcon.ContextMenu>
+                <ContextMenu Margin="0" Background="WhiteSmoke" Foreground="Black" FontSize="12">
+                    <ContextMenu.Style>
+                        <Style TargetType="{x:Type ContextMenu}">
+                            <Setter Property="ItemsPanel" Value="{StaticResource MenuTPL}"/>
+                        </Style>
+                    </ContextMenu.Style>
+                    
+                    <MenuItem x:Name="miShow" Header="Show" Click="miShow_Click" FontWeight="Bold" Padding="-25,0,0,0"/>
+                    <MenuItem x:Name="miMyIp" Header="My IP" Click="miMyIp_Click" Padding="-25,0,0,0"/>
+                    <MenuItem x:Name="miSettings" Header="Settings" Click="miSettings_Click" Padding="-25,0,0,0"/>
+                    <MenuItem x:Name="miExit" Header="Exit and close" Click="miExit_Click" Padding="-25,0,0,0"/>
+                </ContextMenu>
+            </tn:TaskbarIcon.ContextMenu>
+        </tn:TaskbarIcon>
+    </Grid>
+</Window>

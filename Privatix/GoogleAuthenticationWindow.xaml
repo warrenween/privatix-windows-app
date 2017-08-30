@@ -1,0 +1,12 @@
+﻿<Window x:Class="Privatix.GoogleAuthenticationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Authenticate Google+" 
+        Height="500" 
+        Width="480"
+        ResizeMode="NoResize" 
+        WindowStyle="ToolWindow" Icon="res/app.ico" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <WebBrowser x:Name="webBrowser" Navigated="webBrowser_Navigated" Navigating="webBrowser_Navigating" />
+    </Grid>
+</Window>

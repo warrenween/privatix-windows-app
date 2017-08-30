@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" >
+  
+  <?define PRODUCTVERSION="!(bind.fileVersion.Privatix.exe)" ?>
+
+  <Product Id="7AA3DFFA-BC1A-4484-88B6-6A85EF5D8B33" Name="Privatix" Language="1033" Version="$(var.PRODUCTVERSION)" Manufacturer="Privatix" UpgradeCode="7AA3DFFA-BC1A-4484-88B6-6A85EF5D8B33">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated"/>
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes"/>
+
+    <PropertyRef Id="NETFRAMEWORK40FULL"/>
+
+    <Condition Message="This application requires .NET Framework 4.0 or higher. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK40FULL]]>
+    </Condition>
+
+    <WixVariable Id="WixUILicenseRtf" Value="lic.rtf" />
+
+    <Icon Id="app.ico" SourceFile="res/app.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="app.ico" />
+
+    <Property Id="IS_UPDATE" Secure="yes"/>
+
+    <Binary Id="InstallerExtensionsCADll" SourceFile="$(var.InstallerExtensions.TargetDir)\InstallerExtensions.CA.dll" />
+    <CustomAction Id="SaveLogsDirAction" BinaryKey="InstallerExtensionsCADll"  DllEntry="SaveLogsDir" Execute='deferred' Impersonate='no' Return='ignore' />
+    <CustomAction Id="InstallDriversAction" BinaryKey="InstallerExtensionsCADll"  DllEntry="InstallDrivers" Execute='deferred' Impersonate='no' Return='ignore' />
+    <CustomAction Id="UninstallDriversAction" BinaryKey="InstallerExtensionsCADll"  DllEntry="UninstallDrivers" Execute='deferred' Impersonate='no' Return='ignore' />
+    <CustomAction Id="RemoveBundleAction" BinaryKey="InstallerExtensionsCADll" DllEntry="RemoveBundle" Execute='deferred' Impersonate='yes' Return='ignore' />
+    <CustomAction Id="CloseProgramsAction" BinaryKey="InstallerExtensionsCADll" DllEntry="ClosePrograms" Execute='deferred' Impersonate='yes' Return='ignore' />
+    <CustomAction Id="RemoveConnectionAction" BinaryKey="InstallerExtensionsCADll" DllEntry="RemoveConnection" Execute='deferred' Impersonate='yes' Return='ignore' />
+    <CustomAction Id="ReportInstalledAction" BinaryKey="InstallerExtensionsCADll" DllEntry="ReportInstalled" Execute='deferred' Impersonate='yes' Return='ignore' />
+    <CustomAction Id="ReportUninstalledAction" BinaryKey="InstallerExtensionsCADll" DllEntry="ReportUninstalled" Execute='deferred' Impersonate='yes' Return='ignore' />
+    <CustomAction Id="LaunchInstalledExe" FileKey="Privatix.exe" ExeCommand="" Execute="immediate" Impersonate="yes" Return="asyncNoWait" />
+    <CustomAction Id="SetDriverDirAction" Property="InstallDriversAction" Value="OPENVPNDIR=[OPENVPNDIR];OPENVPNDRIVERDIR=[OPENVPNDRIVERDIR]" />
+    <CustomAction Id="SetDriverDirAction2" Property="UninstallDriversAction" Value="OPENVPNDRIVERDIR=[OPENVPNDRIVERDIR]" />
+
+    <InstallExecuteSequence>
+      <Custom Action="SaveLogsDirAction" After="InstallInitialize">NOT Installed</Custom>
+      <Custom Action="ReportInstalledAction" Before="InstallFinalize">NOT Installed AND NOT IS_UPDATE</Custom>
+      <Custom Action="SetDriverDirAction" Before="InstallDriversAction">NOT Installed</Custom>
+      <Custom Action="InstallDriversAction" Before="InstallFinalize">NOT Installed</Custom>
+      <Custom Action="ReportUninstalledAction" After="InstallInitialize">Installed AND NOT IS_UPDATE</Custom>
+      <Custom Action="CloseProgramsAction" After="ReportUninstalledAction">Installed</Custom>
+      <Custom Action="RemoveConnectionAction" Before="UninstallDriversAction">Installed AND NOT IS_UPDATE</Custom>
+      <Custom Action="SetDriverDirAction2" Before="UninstallDriversAction">Installed AND NOT IS_UPDATE</Custom>
+      <Custom Action="UninstallDriversAction" Before="RemoveBundleAction">Installed AND NOT IS_UPDATE</Custom>
+      <Custom Action="RemoveBundleAction" After="InstallInitialize">Installed AND NOT IS_UPDATE</Custom>
+      <Custom Action="LaunchInstalledExe" After="InstallFinalize"/>
+    </InstallExecuteSequence>
+
+
+    <Feature Id="ProductFeature" Title="Privatix Application" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentRef Id="ProgramMenuDir"/>
+    </Feature>
+
+    <Feature Id="OpenVpnx86Feature" Title="OpenVpn" Level="0">
+      <Condition Level="1"><![CDATA[Not VersionNT64]]></Condition>
+      <ComponentGroupRef Id="OpenVpnComponentsx86" />
+      <ComponentGroupRef Id="OpenVpnDriverComponentsx86" />
+    </Feature>
+
+    <Feature Id="OpenVpnx64Feature" Title="OpenVpn x64" Level="0">
+      <Condition Level="1"><![CDATA[VersionNT64]]></Condition>
+      <ComponentGroupRef Id="OpenVpnComponentsx64" />
+      <ComponentGroupRef Id="OpenVpnDriverComponentsx64" />
+    </Feature>
+
+    <UI Id="MyWixUI_Mondo">
+      <UIRef Id="WixUI_Mondo" />
+      <UIRef Id="WixUI_ErrorProgressText" />
+    </UI>
+
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Privatix">
+          <Directory Id="OPENVPNDIR" Name="openvpn">
+            <Directory Id="OPENVPNDRIVERDIR" Name="driver" />
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="Privatix" />
+      </Directory>
+
+      <Directory Id="DesktopFolder" />
+
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <Icon Id="ProgramIcon.exe" SourceFile="$(var.Privatix.TargetPath)" />
+
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+
+      <Component Id="Privatix.exe" Guid="{0BDEC7B2-037B-4C5D-8ACE-5E9F443BE24C}">
+        <File Id="Privatix.exe" Name="$(var.Privatix.TargetFileName)" Source="$(var.Privatix.TargetPath)" DiskId="1" KeyPath="yes" >
+        </File>
+        <File Id="Privatix.exe.config" Name="Privatix.exe.config" Source="$(var.Privatix.TargetDir)\Privatix.exe.config" DiskId="1" />
+
+        <Shortcut Id="UninstallProductInstallFolder"
+                  Name="Uninstall"
+                  Description="Uninstalls Privatix"
+                  Target="[SystemFolder]msiexec.exe"
+                  Arguments="/x [ProductCode]"/>
+      </Component>
+
+      <Component Id="Privatix.Core.dll">
+        <File Id="Privatix.Core.dll" Name="$(var.Privatix.Core.TargetFileName)" Source="$(var.Privatix.Core.TargetPath)" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="Privatix.Resources.dll">
+        <File Id="Privatix.Resources.dll" Name="$(var.Privatix.Resources.TargetFileName)" Source="$(var.Privatix.Resources.TargetPath)" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="Privatix.Service.exe" Guid="{6FE2A0F1-D7D3-4C66-AA73-468FC0D97C0B}">
+        <File Id="Privatix.Service.exe" Name="$(var.Privatix.Service.TargetFileName)" Source="$(var.Privatix.Service.TargetPath)" DiskId="1" KeyPath="yes" >
+        </File>
+        <File Id="Privatix.Service.exe.config" Name="Privatix.Service.exe.config" Source="$(var.Privatix.Service.TargetDir)Privatix.Service.exe.config" DiskId="1" />
+        <ServiceInstall Id="ServiceInstaller" Type="ownProcess" Vital="yes" Name="PrivatixService" DisplayName="Privatix Service" Description="Privatix service" Start="auto"
+                        Account="LocalSystem" ErrorControl="ignore" Interactive="no" />
+        <util:ServiceConfig ServiceName="PrivatixService" FirstFailureActionType="restart" SecondFailureActionType="restart" ThirdFailureActionType="restart" ResetPeriodInDays="1" RestartServiceDelayInSeconds="3" />
+        <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="PrivatixService" Wait="yes" />
+      </Component>
+
+      <Component Id="Newtonsoft.Json.dll">
+        <File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="Hardcodet.Wpf.TaskbarNotification.dll">
+        <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Name="Hardcodet.Wpf.TaskbarNotification.dll" Source="..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net40\Hardcodet.Wpf.TaskbarNotification.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="Heijden.Dns.dll">
+        <File Id="Heijden.Dns.dll" Name="Heijden.Dns.dll" Source="..\packages\Heijden.Dns.1.0.0\lib\net35\Heijden.Dns.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="log4net.dll">
+        <File Id="log4net.dll" Name="log4net.dll" Source="..\packages\log4net.2.0.5\lib\net40-full\log4net.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="DotRas.dll">
+        <File Id="DotRas.dll" Name="DotRas.dll" Source="..\packages\DotRas.for.Win7.1.3.0\lib\net40\DotRas.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="Bugsnag.dll">
+        <File Id="Bugsnag.dll" Name="Bugsnag.dll" Source="..\packages\Bugsnag.1.2.0.0\lib\Net35\Bugsnag.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="Facebook.dll">
+        <File Id="Facebook.dll" Name="Facebook.dll" Source="..\packages\Facebook.7.0.6\lib\net40-client\Facebook.dll" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="ManagedWifi.dll">
+        <File Id="ManagedWifi.dll" Name="$(var.ManagedWifi.TargetFileName)" Source="$(var.ManagedWifi.TargetPath)" DiskId="1" KeyPath="yes" >
+        </File>
+      </Component>
+
+      <Component Id="CertificatesComponentFile" Guid="{8EDE4796-2CA6-446E-ADEE-47F98B002ED3}" >
+        <File Source="./cert/ca_privatix.crt" KeyPath="yes" Checksum="no"/>
+      </Component>
+
+      <Component Id="HttpsCertComponentFile" Guid="{894F6A10-9AD9-498D-ADE1-4B02AB56E415}" >
+        <File Source="./cert/privatix.pfx" KeyPath="yes" Checksum="no"/>
+      </Component>
+
+
+      <Component Id="ApplicationShortcut" Guid="7AA3DFFA-BC1A-4484-88B6-6A85EF5D8B33">
+        <Shortcut Id="DesktopShortcut"
+                  Name="Privatix"
+                  Description="Privatix"
+                  Directory="DesktopFolder"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Advertise="no"
+                  Icon="ProgramIcon.exe"
+                  Target="[INSTALLFOLDER]$(var.Privatix.TargetFileName)" />
+        <Shortcut Id="ProgramMenuShortcut"
+                  Name="Privatix"
+                  Description="Privatix"
+                  Directory="ProgramMenuDir"
+                  Advertise="no"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Icon="ProgramIcon.exe"
+                  Target="[INSTALLFOLDER]$(var.Privatix.TargetFileName)" />
+        <RemoveFolder Id="INSTALLFOLDER" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="allprogs" KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
+    <ComponentGroup Id="OpenVpnComponentsx86" Directory="OPENVPNDIR">
+      <Component Id="openvpn_exe_x86">
+        <File Id="openvpn_exe_x86" Name="openvpn.exe" Source=".\openvpn\x86\openvpn.exe" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="libpkcs11_helper_1_dll_x86">
+        <File Id="libpkcs11_helper_1_dll_x86" Name="libpkcs11-helper-1.dll" Source=".\openvpn\x86\libpkcs11-helper-1.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="liblzo2_2_dll_x86">
+        <File Id="liblzo2_2_dll_x86" Name="liblzo2-2.dll" Source=".\openvpn\x86\liblzo2-2.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="openssl_exe_x86">
+        <File Id="openssl_exe_x86" Name="openssl.exe" Source=".\openvpn\x86\openssl.exe" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="libeay32_dll_x86">
+        <File Id="libeay32_dll_x86" Name="libeay32.dll" Source=".\openvpn\x86\libeay32.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="ssleay32_dll_x86">
+        <File Id="ssleay32_dll_x86" Name="ssleay32.dll" Source=".\openvpn\x86\ssleay32.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="OpenVpnComponentsx64" Directory="OPENVPNDIR">
+      <Component Id="openvpn_exe_x64" Guid="{FB6B5192-4169-4ED5-8BFA-015F3391189C}">
+        <File Id="openvpn_exe_x64" Name="openvpn.exe" Source=".\openvpn\x64\openvpn.exe" DiskId="1" KeyPath="yes" />
+      </Component>
+      <Component Id="libpkcs11_helper_1_dll_x64" Guid="{AA1A2A2A-3BBA-4C6F-A6EA-CE5207D43CCF}">
+        <File Id="libpkcs11_helper_1_dll_x64" Name="libpkcs11-helper-1.dll" Source=".\openvpn\x64\libpkcs11-helper-1.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="liblzo2_2_dll_x64" Guid="{04545CB4-CFA2-463F-BD8B-4EC8A51761AB}">
+        <File Id="liblzo2_2_dll_x64" Name="liblzo2-2.dll" Source=".\openvpn\x64\liblzo2-2.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="openssl_exe_x64" Guid="{33AC612E-78D4-480F-A488-7AB049D316B6}">
+        <File Id="openssl_exe_x64" Name="openssl.exe" Source=".\openvpn\x64\openssl.exe" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="libeay32_dll_x64" Guid="{1CC4247F-34CB-442D-ABE5-4F099898965D}">
+        <File Id="libeay32_dll_x64" Name="libeay32.dll" Source=".\openvpn\x64\libeay32.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="ssleay32_dll_x64" Guid="{9CE86BC2-1796-46A3-80C7-87C06F70A7DA}">
+        <File Id="ssleay32_dll_x64" Name="ssleay32.dll" Source=".\openvpn\x64\ssleay32.dll" DiskId="1" KeyPath="yes"  />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="OpenVpnDriverComponentsx86" Directory="OPENVPNDRIVERDIR">
+      <!--<Component Id="addtap_bat_x86">
+        <File Id="addtap_bat_x86" Name="addtap.bat" Source=".\openvpn\x86\driver\addtap.bat" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="deltapall_bat_x86">
+        <File Id="deltapall_bat_x86" Name="deltapall.bat" Source=".\openvpn\x86\driver\deltapall.bat" DiskId="1" KeyPath="yes"  />
+      </Component>-->
+      <Component Id="tap0901_cat_x86">
+        <File Id="tap0901_cat_x86" Name="tap0901.cat" Source=".\openvpn\x86\driver\tap0901.cat" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="tapinstall_exe_x86">
+        <File Id="tapinstall_exe_x86" Name="tapinstall.exe" Source=".\openvpn\x86\driver\tapinstall.exe" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="tap0901_sys_x86">
+        <File Id="tap0901_sys_x86" Name="tap0901.sys" Source=".\openvpn\x86\driver\tap0901.sys" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="OemVista_inf_x86">
+        <File Id="OemVista_inf_x86" Name="OemVista.inf" Source=".\openvpn\x86\driver\OemVista.inf" DiskId="1" KeyPath="yes"  />
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="OpenVpnDriverComponentsx64" Directory="OPENVPNDRIVERDIR">
+      <!--<Component Id="addtap_bat_x64" Guid="{3D90639C-EABB-4964-8F9E-C8E24DAD0149}">
+        <File Id="addtap_bat_x64" Name="addtap.bat" Source=".\openvpn\x64\driver\addtap.bat" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="deltapall_bat_x64" Guid="{E06864E7-D146-476B-B340-A1D5917DC2F3}">
+        <File Id="deltapall_bat_x64" Name="deltapall.bat" Source=".\openvpn\x64\driver\deltapall.bat" DiskId="1" KeyPath="yes"  />
+      </Component>-->
+      <Component Id="tap0901_cat_x64" Guid="{99DAC6D0-DDB9-4409-948B-40A4237D9152}">
+        <File Id="tap0901_cat_x64" Name="tap0901.cat" Source=".\openvpn\x64\driver\tap0901.cat" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="tapinstall_exe_x64" Guid="{DFECD12A-DA22-4D11-B339-9A00CF15BEC5}">
+        <File Id="tapinstall_exe_x64" Name="tapinstall.exe" Source=".\openvpn\x64\driver\tapinstall.exe" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="tap0901_sys_x64" Guid="{6BAA1787-0D39-41FB-86ED-78499CDA7D85}">
+        <File Id="tap0901_sys_x64" Name="tap0901.sys" Source=".\openvpn\x64\driver\tap0901.sys" DiskId="1" KeyPath="yes"  />
+      </Component>
+      <Component Id="OemVista_inf_x64" Guid="{6C8F1655-43ED-4D6D-9107-DBCFAE9D68C2}">
+        <File Id="OemVista_inf_x64" Name="OemVista.inf" Source=".\openvpn\x64\driver\OemVista.inf" DiskId="1" KeyPath="yes"  />
+      </Component>
+    </ComponentGroup>
+
+    <DirectoryRef Id="ProgramMenuDir">
+      <Component Id="ProgramMenuDir" Guid="{4DA86411-B282-4911-97B4-3CB3D30E9EE4}">
+
+        <Shortcut Id="UninstallProduct"
+            Name="Uninstall"
+            Target="[SystemFolder]msiexec.exe"
+            Arguments="/x [ProductCode]"
+            Directory="ProgramMenuDir"
+            Icon="ProgramIcon.exe"
+            Description="Uninstall Privatix" />
+
+        <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="allprogs" KeyPath="yes" />
+      </Component>
+
+    </DirectoryRef>
+
+  </Fragment>
+</Wix>

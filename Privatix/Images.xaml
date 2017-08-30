@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="GrayIcon" UriSource="res/grey16.ico" />
+    <BitmapImage x:Key="BlueIcon" UriSource="res/app16.ico" />
+    <BitmapImage x:Key="Locked" UriSource="res/locked.png" />
+    <BitmapImage x:Key="Unlocked" UriSource="res/unlocked.png" />
+    <BitmapImage x:Key="TimerBanner" UriSource="res/timer_banner.png" />
+</ResourceDictionary>

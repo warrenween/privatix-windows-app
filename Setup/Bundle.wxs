@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     >
+  
+  <?ifdef env.SETUP_MSI_URL ?>
+    <?define PrivatixSetupMsiUrl=$(env.SETUP_MSI_URL) ?>
+  <?else?>
+    <?define PrivatixSetupMsiUrl="https://dxw4crzwfgmzw.cloudfront.net/win/PrivatixSetup.msi" ?>
+  <?endif?>
+
+  <?define PRODUCTVERSION="!(bind.packageVersion.PrivatixSetup)" ?>
+  
+  <Bundle Name="Privatix" Version="$(var.PRODUCTVERSION)" Manufacturer="Privatix" UpgradeCode="68a84909-e65e-4611-9b3a-148f54e4ff59" DisableModify="yes" DisableRemove="yes" IconSourceFile="res/app.ico">
+    <BootstrapperApplicationRef Id="WixExtendedBootstrapperApplication.RtfLicense">
+      <bal:WixExtendedBootstrapperApplication LicenseUrl="" SuppressOptionsUI="yes" SuppressRepair="yes" />
+    </BootstrapperApplicationRef>
+    <WixVariable Id="WixExtbaLicenseRtf" Value="lic.rtf" />
+    
+		<Chain>
+      <!-- Check and install if need .NetFramework 4.0 -->
+      <PackageGroupRef Id="NetFx40Web"/>
+      
+      <RollbackBoundary />
+      
+      <MsiPackage Name="Privatix"
+                  DownloadUrl="$(var.PrivatixSetupMsiUrl)"
+                  SourceFile="$(var.PrivatixSetup.TargetPath)"
+                  Id="PrivatixSetup"
+                  Cache="no"
+                  Compressed="no"
+                  Permanent="no"
+                  Vital="yes"
+                  DisplayInternalUI="no"
+                  Visible="yes"
+                  SuppressSignatureVerification="no"
+                  />
+		</Chain>
+	</Bundle>
+</Wix>

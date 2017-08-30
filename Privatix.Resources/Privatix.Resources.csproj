@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2991DB72-AB58-407A-8C3F-B44BF618BAD6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Privatix.Resources</RootNamespace>
+    <AssemblyName>Privatix.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'production|AnyCPU'">
+    <OutputPath>bin\production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'production|x86'">
+    <OutputPath>bin\x86\production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'dev|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\dev\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'dev|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\dev\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'stage|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\stage\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'stage|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\stage\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="big_flags\ad.png" />
+    <Resource Include="big_flags\ae.png" />
+    <Resource Include="big_flags\af.png" />
+    <Resource Include="big_flags\ag.png" />
+    <Resource Include="big_flags\al.png" />
+    <Resource Include="big_flags\am.png" />
+    <Resource Include="big_flags\ao.png" />
+    <Resource Include="big_flags\ar.png" />
+    <Resource Include="big_flags\at.png" />
+    <Resource Include="big_flags\au.png" />
+    <Resource Include="big_flags\az.png" />
+    <Resource Include="big_flags\ba.png" />
+    <Resource Include="big_flags\bb.png" />
+    <Resource Include="big_flags\bd.png" />
+    <Resource Include="big_flags\be.png" />
+    <Resource Include="big_flags\bf.png" />
+    <Resource Include="big_flags\bg.png" />
+    <Resource Include="big_flags\bh.png" />
+    <Resource Include="big_flags\bi.png" />
+    <Resource Include="big_flags\bj.png" />
+    <Resource Include="big_flags\bn.png" />
+    <Resource Include="big_flags\bo.png" />
+    <Resource Include="big_flags\br.png" />
+    <Resource Include="big_flags\bs.png" />
+    <Resource Include="big_flags\bt.png" />
+    <Resource Include="big_flags\bw.png" />
+    <Resource Include="big_flags\by.png" />
+    <Resource Include="big_flags\bz.png" />
+    <Resource Include="big_flags\ca.png" />
+    <Resource Include="big_flags\cd.png" />
+    <Resource Include="big_flags\cf.png" />
+    <Resource Include="big_flags\cg.png" />
+    <Resource Include="big_flags\ch.png" />
+    <Resource Include="big_flags\ci.png" />
+    <Resource Include="big_flags\cl.png" />
+    <Resource Include="big_flags\cm.png" />
+    <Resource Include="big_flags\cn.png" />
+    <Resource Include="big_flags\co.png" />
+    <Resource Include="big_flags\cr.png" />
+    <Resource Include="big_flags\cu.png" />
+    <Resource Include="big_flags\cv.png" />
+    <Resource Include="big_flags\cy.png" />
+    <Resource Include="big_flags\cz.png" />
+    <Resource Include="big_flags\de.png" />
+    <Resource Include="big_flags\dj.png" />
+    <Resource Include="big_flags\dk.png" />
+    <Resource Include="big_flags\dm.png" />
+    <Resource Include="big_flags\do.png" />
+    <Resource Include="big_flags\dz.png" />
+    <Resource Include="big_flags\ec.png" />
+    <Resource Include="big_flags\ee.png" />
+    <Resource Include="big_flags\eg.png" />
+    <Resource Include="big_flags\eh.png" />
+    <Resource Include="big_flags\er.png" />
+    <Resource Include="big_flags\es.png" />
+    <Resource Include="big_flags\et.png" />
+    <Resource Include="big_flags\fi.png" />
+    <Resource Include="big_flags\fj.png" />
+    <Resource Include="big_flags\fm.png" />
+    <Resource Include="big_flags\fr.png" />
+    <Resource Include="big_flags\ga.png" />
+    <Resource Include="big_flags\gb.png" />
+    <Resource Include="big_flags\gd.png" />
+    <Resource Include="big_flags\ge.png" />
+    <Resource Include="big_flags\gh.png" />
+    <Resource Include="big_flags\gm.png" />
+    <Resource Include="big_flags\gn.png" />
+    <Resource Include="big_flags\gq.png" />
+    <Resource Include="big_flags\gr.png" />
+    <Resource Include="big_flags\gt.png" />
+    <Resource Include="big_flags\gw.png" />
+    <Resource Include="big_flags\gy.png" />
+    <Resource Include="big_flags\hn.png" />
+    <Resource Include="big_flags\hr.png" />
+    <Resource Include="big_flags\ht.png" />
+    <Resource Include="big_flags\hu.png" />
+    <Resource Include="big_flags\id.png" />
+    <Resource Include="big_flags\ie.png" />
+    <Resource Include="big_flags\il.png" />
+    <Resource Include="big_flags\in.png" />
+    <Resource Include="big_flags\iq.png" />
+    <Resource Include="big_flags\ir.png" />
+    <Resource Include="big_flags\is.png" />
+    <Resource Include="big_flags\it.png" />
+    <Resource Include="big_flags\jm.png" />
+    <Resource Include="big_flags\jo.png" />
+    <Resource Include="big_flags\jp.png" />
+    <Resource Include="big_flags\ke.png" />
+    <Resource Include="big_flags\kg.png" />
+    <Resource Include="big_flags\kh.png" />
+    <Resource Include="big_flags\ki.png" />
+    <Resource Include="big_flags\km.png" />
+    <Resource Include="big_flags\kn.png" />
+    <Resource Include="big_flags\kp.png" />
+    <Resource Include="big_flags\kr.png" />
+    <Resource Include="big_flags\ks.png" />
+    <Resource Include="big_flags\kw.png" />
+    <Resource Include="big_flags\kz.png" />
+    <Resource Include="big_flags\la.png" />
+    <Resource Include="big_flags\lb.png" />
+    <Resource Include="big_flags\lc.png" />
+    <Resource Include="big_flags\li.png" />
+    <Resource Include="big_flags\lk.png" />
+    <Resource Include="big_flags\lr.png" />
+    <Resource Include="big_flags\ls.png" />
+    <Resource Include="big_flags\lt.png" />
+    <Resource Include="big_flags\lu.png" />
+    <Resource Include="big_flags\lv.png" />
+    <Resource Include="big_flags\ly.png" />
+    <Resource Include="big_flags\ma.png" />
+    <Resource Include="big_flags\mc.png" />
+    <Resource Include="big_flags\md.png" />
+    <Resource Include="big_flags\me.png" />
+    <Resource Include="big_flags\mg.png" />
+    <Resource Include="big_flags\mh.png" />
+    <Resource Include="big_flags\mk.png" />
+    <Resource Include="big_flags\ml.png" />
+    <Resource Include="big_flags\mm.png" />
+    <Resource Include="big_flags\mn.png" />
+    <Resource Include="big_flags\mr.png" />
+    <Resource Include="big_flags\mt.png" />
+    <Resource Include="big_flags\mu.png" />
+    <Resource Include="big_flags\mv.png" />
+    <Resource Include="big_flags\mw.png" />
+    <Resource Include="big_flags\mx.png" />
+    <Resource Include="big_flags\my.png" />
+    <Resource Include="big_flags\mz.png" />
+    <Resource Include="big_flags\na.png" />
+    <Resource Include="big_flags\ne.png" />
+    <Resource Include="big_flags\ng.png" />
+    <Resource Include="big_flags\ni.png" />
+    <Resource Include="big_flags\nl.png" />
+    <Resource Include="big_flags\no.png" />
+    <Resource Include="big_flags\np.png" />
+    <Resource Include="big_flags\nr.png" />
+    <Resource Include="big_flags\nz.png" />
+    <Resource Include="big_flags\om.png" />
+    <Resource Include="big_flags\pa.png" />
+    <Resource Include="big_flags\pe.png" />
+    <Resource Include="big_flags\pg.png" />
+    <Resource Include="big_flags\ph.png" />
+    <Resource Include="big_flags\pk.png" />
+    <Resource Include="big_flags\pl.png" />
+    <Resource Include="big_flags\pt.png" />
+    <Resource Include="big_flags\pw.png" />
+    <Resource Include="big_flags\py.png" />
+    <Resource Include="big_flags\qa.png" />
+    <Resource Include="big_flags\ro.png" />
+    <Resource Include="big_flags\rs.png" />
+    <Resource Include="big_flags\ru.png" />
+    <Resource Include="big_flags\rw.png" />
+    <Resource Include="big_flags\sa.png" />
+    <Resource Include="big_flags\sb.png" />
+    <Resource Include="big_flags\sc.png" />
+    <Resource Include="big_flags\sd.png" />
+    <Resource Include="big_flags\se.png" />
+    <Resource Include="big_flags\sg.png" />
+    <Resource Include="big_flags\si.png" />
+    <Resource Include="big_flags\sk.png" />
+    <Resource Include="big_flags\sl.png" />
+    <Resource Include="big_flags\sm.png" />
+    <Resource Include="big_flags\sn.png" />
+    <Resource Include="big_flags\so.png" />
+    <Resource Include="big_flags\sr.png" />
+    <Resource Include="big_flags\st.png" />
+    <Resource Include="big_flags\sv.png" />
+    <Resource Include="big_flags\sy.png" />
+    <Resource Include="big_flags\sz.png" />
+    <Resource Include="big_flags\td.png" />
+    <Resource Include="big_flags\tg.png" />
+    <Resource Include="big_flags\th.png" />
+    <Resource Include="big_flags\tj.png" />
+    <Resource Include="big_flags\tl.png" />
+    <Resource Include="big_flags\tm.png" />
+    <Resource Include="big_flags\tn.png" />
+    <Resource Include="big_flags\to.png" />
+    <Resource Include="big_flags\tr.png" />
+    <Resource Include="big_flags\tt.png" />
+    <Resource Include="big_flags\tv.png" />
+    <Resource Include="big_flags\tw.png" />
+    <Resource Include="big_flags\tz.png" />
+    <Resource Include="big_flags\ua.png" />
+    <Resource Include="big_flags\ug.png" />
+    <Resource Include="big_flags\us.png" />
+    <Resource Include="big_flags\uy.png" />
+    <Resource Include="big_flags\uz.png" />
+    <Resource Include="big_flags\va.png" />
+    <Resource Include="big_flags\vc.png" />
+    <Resource Include="big_flags\ve.png" />
+    <Resource Include="big_flags\vn.png" />
+    <Resource Include="big_flags\vu.png" />
+    <Resource Include="big_flags\ws.png" />
+    <Resource Include="big_flags\ye.png" />
+    <Resource Include="big_flags\za.png" />
+    <Resource Include="big_flags\zm.png" />
+    <Resource Include="big_flags\zw.png" />
+    <Resource Include="small_flags\ad.png" />
+    <Resource Include="small_flags\ae.png" />
+    <Resource Include="small_flags\af.png" />
+    <Resource Include="small_flags\ag.png" />
+    <Resource Include="small_flags\al.png" />
+    <Resource Include="small_flags\am.png" />
+    <Resource Include="small_flags\ao.png" />
+    <Resource Include="small_flags\ar.png" />
+    <Resource Include="small_flags\at.png" />
+    <Resource Include="small_flags\au.png" />
+    <Resource Include="small_flags\az.png" />
+    <Resource Include="small_flags\ba.png" />
+    <Resource Include="small_flags\bb.png" />
+    <Resource Include="small_flags\bd.png" />
+    <Resource Include="small_flags\be.png" />
+    <Resource Include="small_flags\bf.png" />
+    <Resource Include="small_flags\bg.png" />
+    <Resource Include="small_flags\bh.png" />
+    <Resource Include="small_flags\bi.png" />
+    <Resource Include="small_flags\bj.png" />
+    <Resource Include="small_flags\bn.png" />
+    <Resource Include="small_flags\bo.png" />
+    <Resource Include="small_flags\br.png" />
+    <Resource Include="small_flags\bs.png" />
+    <Resource Include="small_flags\bt.png" />
+    <Resource Include="small_flags\bw.png" />
+    <Resource Include="small_flags\by.png" />
+    <Resource Include="small_flags\bz.png" />
+    <Resource Include="small_flags\ca.png" />
+    <Resource Include="small_flags\cd.png" />
+    <Resource Include="small_flags\cf.png" />
+    <Resource Include="small_flags\cg.png" />
+    <Resource Include="small_flags\ch.png" />
+    <Resource Include="small_flags\ci.png" />
+    <Resource Include="small_flags\cl.png" />
+    <Resource Include="small_flags\cm.png" />
+    <Resource Include="small_flags\cn.png" />
+    <Resource Include="small_flags\co.png" />
+    <Resource Include="small_flags\cr.png" />
+    <Resource Include="small_flags\cu.png" />
+    <Resource Include="small_flags\cv.png" />
+    <Resource Include="small_flags\cy.png" />
+    <Resource Include="small_flags\cz.png" />
+    <Resource Include="small_flags\de.png" />
+    <Resource Include="small_flags\dj.png" />
+    <Resource Include="small_flags\dk.png" />
+    <Resource Include="small_flags\dm.png" />
+    <Resource Include="small_flags\do.png" />
+    <Resource Include="small_flags\dz.png" />
+    <Resource Include="small_flags\ec.png" />
+    <Resource Include="small_flags\ee.png" />
+    <Resource Include="small_flags\eg.png" />
+    <Resource Include="small_flags\eh.png" />
+    <Resource Include="small_flags\er.png" />
+    <Resource Include="small_flags\es.png" />
+    <Resource Include="small_flags\et.png" />
+    <Resource Include="small_flags\fi.png" />
+    <Resource Include="small_flags\fj.png" />
+    <Resource Include="small_flags\fm.png" />
+    <Resource Include="small_flags\fr.png" />
+    <Resource Include="small_flags\ga.png" />
+    <Resource Include="small_flags\gb.png" />
+    <Resource Include="small_flags\gd.png" />
+    <Resource Include="small_flags\ge.png" />
+    <Resource Include="small_flags\gh.png" />
+    <Resource Include="small_flags\gm.png" />
+    <Resource Include="small_flags\gn.png" />
+    <Resource Include="small_flags\gq.png" />
+    <Resource Include="small_flags\gr.png" />
+    <Resource Include="small_flags\gt.png" />
+    <Resource Include="small_flags\gw.png" />
+    <Resource Include="small_flags\gy.png" />
+    <Resource Include="small_flags\hn.png" />
+    <Resource Include="small_flags\hr.png" />
+    <Resource Include="small_flags\ht.png" />
+    <Resource Include="small_flags\hu.png" />
+    <Resource Include="small_flags\id.png" />
+    <Resource Include="small_flags\ie.png" />
+    <Resource Include="small_flags\il.png" />
+    <Resource Include="small_flags\in.png" />
+    <Resource Include="small_flags\iq.png" />
+    <Resource Include="small_flags\ir.png" />
+    <Resource Include="small_flags\is.png" />
+    <Resource Include="small_flags\it.png" />
+    <Resource Include="small_flags\jm.png" />
+    <Resource Include="small_flags\jo.png" />
+    <Resource Include="small_flags\jp.png" />
+    <Resource Include="small_flags\ke.png" />
+    <Resource Include="small_flags\kg.png" />
+    <Resource Include="small_flags\kh.png" />
+    <Resource Include="small_flags\ki.png" />
+    <Resource Include="small_flags\km.png" />
+    <Resource Include="small_flags\kn.png" />
+    <Resource Include="small_flags\kp.png" />
+    <Resource Include="small_flags\kr.png" />
+    <Resource Include="small_flags\ks.png" />
+    <Resource Include="small_flags\kw.png" />
+    <Resource Include="small_flags\kz.png" />
+    <Resource Include="small_flags\la.png" />
+    <Resource Include="small_flags\lb.png" />
+    <Resource Include="small_flags\lc.png" />
+    <Resource Include="small_flags\li.png" />
+    <Resource Include="small_flags\lk.png" />
+    <Resource Include="small_flags\lr.png" />
+    <Resource Include="small_flags\ls.png" />
+    <Resource Include="small_flags\lt.png" />
+    <Resource Include="small_flags\lu.png" />
+    <Resource Include="small_flags\lv.png" />
+    <Resource Include="small_flags\ly.png" />
+    <Resource Include="small_flags\ma.png" />
+    <Resource Include="small_flags\mc.png" />
+    <Resource Include="small_flags\md.png" />
+    <Resource Include="small_flags\me.png" />
+    <Resource Include="small_flags\mg.png" />
+    <Resource Include="small_flags\mh.png" />
+    <Resource Include="small_flags\mk.png" />
+    <Resource Include="small_flags\ml.png" />
+    <Resource Include="small_flags\mm.png" />
+    <Resource Include="small_flags\mn.png" />
+    <Resource Include="small_flags\mr.png" />
+    <Resource Include="small_flags\mt.png" />
+    <Resource Include="small_flags\mu.png" />
+    <Resource Include="small_flags\mv.png" />
+    <Resource Include="small_flags\mw.png" />
+    <Resource Include="small_flags\mx.png" />
+    <Resource Include="small_flags\my.png" />
+    <Resource Include="small_flags\mz.png" />
+    <Resource Include="small_flags\na.png" />
+    <Resource Include="small_flags\ne.png" />
+    <Resource Include="small_flags\ng.png" />
+    <Resource Include="small_flags\ni.png" />
+    <Resource Include="small_flags\nl.png" />
+    <Resource Include="small_flags\no.png" />
+    <Resource Include="small_flags\np.png" />
+    <Resource Include="small_flags\nr.png" />
+    <Resource Include="small_flags\nz.png" />
+    <Resource Include="small_flags\om.png" />
+    <Resource Include="small_flags\pa.png" />
+    <Resource Include="small_flags\pe.png" />
+    <Resource Include="small_flags\pg.png" />
+    <Resource Include="small_flags\ph.png" />
+    <Resource Include="small_flags\pk.png" />
+    <Resource Include="small_flags\pl.png" />
+    <Resource Include="small_flags\pt.png" />
+    <Resource Include="small_flags\pw.png" />
+    <Resource Include="small_flags\py.png" />
+    <Resource Include="small_flags\qa.png" />
+    <Resource Include="small_flags\ro.png" />
+    <Resource Include="small_flags\rs.png" />
+    <Resource Include="small_flags\ru.png" />
+    <Resource Include="small_flags\rw.png" />
+    <Resource Include="small_flags\sa.png" />
+    <Resource Include="small_flags\sb.png" />
+    <Resource Include="small_flags\sc.png" />
+    <Resource Include="small_flags\sd.png" />
+    <Resource Include="small_flags\se.png" />
+    <Resource Include="small_flags\sg.png" />
+    <Resource Include="small_flags\si.png" />
+    <Resource Include="small_flags\sk.png" />
+    <Resource Include="small_flags\sl.png" />
+    <Resource Include="small_flags\sm.png" />
+    <Resource Include="small_flags\sn.png" />
+    <Resource Include="small_flags\so.png" />
+    <Resource Include="small_flags\sr.png" />
+    <Resource Include="small_flags\st.png" />
+    <Resource Include="small_flags\sv.png" />
+    <Resource Include="small_flags\sy.png" />
+    <Resource Include="small_flags\sz.png" />
+    <Resource Include="small_flags\td.png" />
+    <Resource Include="small_flags\tg.png" />
+    <Resource Include="small_flags\th.png" />
+    <Resource Include="small_flags\tj.png" />
+    <Resource Include="small_flags\tl.png" />
+    <Resource Include="small_flags\tm.png" />
+    <Resource Include="small_flags\tn.png" />
+    <Resource Include="small_flags\to.png" />
+    <Resource Include="small_flags\tr.png" />
+    <Resource Include="small_flags\tt.png" />
+    <Resource Include="small_flags\tv.png" />
+    <Resource Include="small_flags\tw.png" />
+    <Resource Include="small_flags\tz.png" />
+    <Resource Include="small_flags\ua.png" />
+    <Resource Include="small_flags\ug.png" />
+    <Resource Include="small_flags\us.png" />
+    <Resource Include="small_flags\uy.png" />
+    <Resource Include="small_flags\uz.png" />
+    <Resource Include="small_flags\va.png" />
+    <Resource Include="small_flags\vc.png" />
+    <Resource Include="small_flags\ve.png" />
+    <Resource Include="small_flags\vn.png" />
+    <Resource Include="small_flags\vu.png" />
+    <Resource Include="small_flags\ws.png" />
+    <Resource Include="small_flags\ye.png" />
+    <Resource Include="small_flags\za.png" />
+    <Resource Include="small_flags\zm.png" />
+    <Resource Include="small_flags\zw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="big_flags\hk.png" />
+    <Resource Include="small_flags\hk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="small_flags\ol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="small_flags\none.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="big_flags\unknown.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)Sign\signfile.bat" "$(TargetPath)" "$(SolutionDir)Sign\"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

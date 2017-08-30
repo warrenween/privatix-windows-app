@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="Privatix.Controls.Protection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Privatix.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="385" 
+             x:Name="RootProtection">
+    <UserControl.Resources>
+        <Style x:Key="ProtectionStrings" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="9" />
+            <Setter Property="Foreground" Value="#B0B0B0" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="LineHeight" Value="9" />
+            <Setter Property="ClipToBounds" Value="True" />
+        </Style>
+        <Style x:Key="DevModeComboBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=RootProtection, Path=DevMode}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Background="White">
+        <Canvas Width="385" Height="226">
+            <TextBlock x:Name="tbString1" Canvas.Left="0" Canvas.Top="87" Style="{StaticResource ProtectionStrings}"
+                       Text="| EMAILS | PASSWORDS | CHATS | PHOTOS | BANK ACCOUNTS | FACEBOOK | WEBSITES | PRIVATE DATA | SECRETS | DOCUMENTS | SMS | LOCATION | CREDIT CARDS " />
+            <TextBlock x:Name="tbString2" Canvas.Left="0" Canvas.Top="96" Style="{StaticResource ProtectionStrings}"
+                       Text="| SECRETS | DOCUMENTS | EMAILS | LOCATION | PASSWORDS | SMS | CHATS | CREDIT CARDS | PHOTOS | BANK ACCOUNTS | FACEBOOK | WEBSITES | PRIVATE DATA " />
+            <TextBlock x:Name="tbString3" Canvas.Left="0" Canvas.Top="105" Style="{StaticResource ProtectionStrings}" 
+                       Text="| CREDIT CARDS | LOCATION | WEBSITES | PRIVATE DATA | SECRETS | DOCUMENTS | EMAILS | SMS | PASSWORDS | CHATS | PHOTOS | BANK ACCOUNTS | FACEBOOK " />
+            <TextBlock x:Name="tbString4" Canvas.Left="0" Canvas.Top="114" Style="{StaticResource ProtectionStrings}" 
+                       Text="| LOCATION | SMS | BANK ACCOUNTS | WEBSITES | PRIVATE DATA | FACEBOOK | SECRETS | DOCUMENTS | EMAILS | CREDIT CARDS | PASSWORDS | CHATS | PHOTOS " />
+            <TextBlock x:Name="tbString5" Canvas.Left="0" Canvas.Top="123" Style="{StaticResource ProtectionStrings}" 
+                       Text="| FACEBOOK | EMAILS | PASSWORDS | LOCATION | CHATS | PHOTOS | WEBSITES | CREDIT CARDS | PRIVATE DATA | SECRETS | DOCUMENTS | BANK ACCOUNTS | SMS " />
+            <TextBlock x:Name="tbString6" Canvas.Left="0" Canvas.Top="132" Style="{StaticResource ProtectionStrings}"
+                       Text="| SMS | FACEBOOK | WEBSITES | PRIVATE DATA | CREDIT CARDS | SECRETS | EMAILS | PASSWORDS | DOCUMENTS | LOCATION | PHOTOS | BANK ACCOUNTS | CHATS " />
+            <TextBlock x:Name="tbString7" Canvas.Left="0" Canvas.Top="141" Style="{StaticResource ProtectionStrings}"
+                       Text="| CHATS | PHOTOS | EMAILS | PASSWORDS | BANK ACCOUNTS | LOCATION | CREDIT CARDS | FACEBOOK | WEBSITES | PRIVATE DATA | SMS | SECRETS | DOCUMENTS " />
+
+            <Image x:Name="imgShield" Canvas.Left="116" Canvas.Top="36" Source="../res/shield.png"  Width="165" Height="189"/>
+
+            <Path x:Name="pathBrokenShield" Fill="Silver" Height="193" Canvas.Left="115" Canvas.Top="34" Width="169" Visibility="Collapsed"
+                  Data="F1M29.975,13.317C30.917,15.271 33.056,19.594 33.056,19.594 33.056,19.594 35.069,20.953 39.272,23.564 28.86,24.832 20.187,25.959 14.013,27.037 14.013,27.037 20.421,108.295 20.421,108.295 20.837,127.545 36.6,145.868 51.151,157.849 62.485,167.182 76.452,175.131 81.002,178.746 81.002,178.746 81.002,108.459 81.002,61.616 82.259,63.217 85.026,66.591 85.026,66.591 85.026,66.591 97.115,89.718 97.115,89.718 97.115,89.718 99.84,78.986 99.84,78.986 99.84,78.986 108.463,116.106 108.463,116.106 108.463,116.106 128.189,124.945 128.189,124.945 128.189,124.945 137.706,136.285 137.706,136.285 137.706,136.285 138.904,141.565 139.245,146.51 133.445,153.942 125.905,160.681 118.724,166.594 100.837,181.322 81.316,191.127 81.316,191.127 81.316,191.127 61.795,181.322 43.907,166.594 26.03,151.872 8.559,132.033 8.063,109.106 8.063,109.106 1.964,18.059 1.964,18.059 1.964,18.059 13.316,15.721 29.975,13.317z M88.745,1.944C128.557,1.944 167.051,11.05 167.051,11.05 167.051,11.05 161.047,101.718 161.047,101.718 160.751,115.402 154.733,127.985 146.127,139.037 145.668,134.226 145.238,128.492 145.238,128.492 145.238,128.492 135.504,117.231 135.504,117.231 135.504,117.231 115.83,108.573 115.83,108.573 115.83,108.573 107.3,71.266 107.3,71.266 107.3,71.266 104.573,81.923 104.573,81.923 104.573,81.923 91.257,56.263 91.257,56.263 91.257,56.263 90.098,55.063 89.019,54.299 89.019,30.854 89.019,12.977 89.019,12.977 75.167,12.977 59.872,14.572 46.86,16.151 41.84,13.08 40.451,12.225 40.451,12.225 40.451,12.225 39.813,11.007 37.204,5.952 51.677,3.859 70.186,1.944 88.745,1.944z"/>
+        </Canvas>
+        <TextBlock Margin="5,32,5,5" FontWeight="Bold" FontSize="35" 
+                   FontFamily="Segoe UI Semibold" IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight"
+                   LineHeight="35" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center">
+            <Run Text="Protection is"/>
+            <Run x:Name="tbProtection" Foreground="#FF51AF2F" Text="ON"/>
+        </TextBlock>
+        <TextBlock  Margin="5,9,5,5" FontSize="16" FontFamily="Segoe UI" 
+                   IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" LineHeight="20" TextAlignment="Center"
+                   TextWrapping="Wrap"  >
+            <Run x:Name="tbStatus" Foreground="#FF7F7F7F" Text="To encrypt network activity and Wi-Fi hotspots, &#xA;change location and unblock sites -" />
+            <Run x:Name="tbTurnOn" Foreground="#FF4C4C4C" Text="turn on" TextDecorations="Underline" Cursor="Hand" MouseLeftButtonUp="chbSwitchProtection_Click"/>
+        </TextBlock>
+
+        <Button x:Name="btnSelectServer" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Cursor="Hand" 
+                Click="ChangeCountry_Click" Padding="0" Width="337" Height="32">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="5,39,5,5" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=RootProtection, Path=DevMode}" Value="True">
+                            <Setter Property="Margin" Value="5,9,5,5" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderThickness="2" BorderBrush="#848484" Background="Transparent" Width="337" >
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Content>
+                <Grid Width="332" Height="28">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="imgCountryFlag" Grid.Column="0" Width="32" Height="20" Margin="6,4,6,4" Stretch="Fill" 
+                            Source="pack://application:,,,/Privatix.Resources;component/small_flags/de.png"/>
+                    <TextBlock x:Name="tbCountry" Grid.Column="1" Margin="6,6,6,4" Foreground="Black" FontSize="15" FontFamily="Segoe UI" IsHyphenationEnabled="True" 
+                                LineStackingStrategy="BlockLineHeight" TextAlignment="Left" TextWrapping="Wrap" Text="Germany"
+                                VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Image Grid.Column="2" Source="../res/chevron.png" Width="12" Height="7" Margin="9,1,9,0" />
+                </Grid>
+            </Button.Content>
+        </Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ComboBox x:Name="cbNode" Grid.Column="0" Margin="25,5,10,5" Width="200" Background="White" Style="{StaticResource DevModeComboBox}" 
+                      SelectionChanged="cbNode_SelectionChanged"/>
+            <ComboBox x:Name="cbProtocol" Grid.Column="1" Margin="10,5,25,5" HorizontalAlignment="Right" Width="110" SelectedIndex="0" Background="White" 
+                      Style="{StaticResource DevModeComboBox}" SelectionChanged="cbProtocol_SelectionChanged">
+                <ComboBoxItem x:Name="cbiProtoIpsec">IPsec</ComboBoxItem>
+                <ComboBoxItem x:Name="cbiProtoOpenUdp">OpenVPN UDP</ComboBoxItem>
+                <ComboBoxItem x:Name="cbiProtoOpenTcp">OpenVPN TCP</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Grid Margin="5,21,5,5" Width="336">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="tbSwitchProtection" Grid.Row="0" Grid.Column="0" Foreground="Black" FontSize="15" 
+                       FontFamily="Segoe UI" IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" 
+                       LineHeight="15" TextAlignment="Left" TextWrapping="Wrap" Text="Switch to disable protection"/>
+            <CheckBox x:Name="chbSwitchProtection" Grid.Row="0" Grid.Column="1" Style="{DynamicResource GreenCheckBoxStyle}" 
+                      IsChecked="True" HorizontalAlignment="Right" Click="chbSwitchProtection_Click"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

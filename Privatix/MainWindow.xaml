@@ -1,0 +1,46 @@
+﻿<Window x:Class="Privatix.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:Privatix.Controls"
+        Title="Privatix" Height="Auto" Width="Auto" ResizeMode="CanMinimize" Icon="res/app.ico" SizeToContent="WidthAndHeight"
+        Closing="Window_Closing" 
+        StateChanged="Window_StateChanged"
+        WindowStartupLocation="CenterScreen"
+        x:Name="root">
+
+    <Canvas HorizontalAlignment="Center" VerticalAlignment="Top" Width="385" Height="550">
+        <StackPanel x:Name="spContainer" HorizontalAlignment="Center" VerticalAlignment="Top" Width="385" Height="550">
+            <Grid x:Name="gridHeader" Width="385" Height="52" Background="#007fbb" UseLayoutRounding="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnBack" Grid.Column="0" Style="{DynamicResource ImgButtonStyle}" Margin="14,3,5,5" Click="btnBack_Click">
+                    <Image Source="res/back.png" Width="19" Height="17" />
+                </Button>
+                <Controls:DisconnectTimer x:Name="disconnectTimer" Grid.Column="1" Margin="5,5,5,3" Cursor="Hand"
+                                          MouseLeftButtonDown="disconnectTimer_MouseLeftButtonDown"/>
+                <Image x:Name="imgLogo" Grid.Column="0" Grid.ColumnSpan="5" Source="res/header_logo.png" Width="121" Height="20" Cursor="Hand" 
+                       HorizontalAlignment="Center" MouseLeftButtonDown="imgLogo_MouseLeftButtonDown"/>
+                <Button x:Name="btnIp" Grid.Column="3" Style="{DynamicResource ImgButtonStyle}" Margin="5,5,4,5" Click="btnIp_Click">
+                    <Image Source="res/ip.png" Width="17" Height="14" />
+                </Button>
+                <Button x:Name="btnSettings" Grid.Column="4" Style="{DynamicResource ImgButtonStyle}" Margin="5,5,15,5" Click="btnSettings_Click">
+                    <Image Source="res/settings.png" Width="19" Height="19" />
+                </Button>
+            </Grid>
+            <Controls:Settings x:Name="ctrlSettings" Visibility="Collapsed"/>
+            <Controls:IpAddress x:Name="ctrlIpAddress" Visibility="Collapsed"/>
+            <Controls:Protection x:Name="ctrlProtection" DevMode="{Binding ElementName=root, Path=DevMode}" />
+            <Controls:SignIn x:Name="ctrlSignIn" Visibility="Collapsed"/>
+            <Controls:SignUp x:Name="ctrlSignUp" Visibility="Collapsed"/>
+            <Controls:PasswordRecovery x:Name="ctrlPasswordRecovery" Visibility="Collapsed"/>
+            <Controls:PasswordRecovered x:Name="ctrlPasswordRecovered" Visibility="Collapsed"/>
+            <Controls:ServerList x:Name="ctrlServerList" Visibility="Collapsed"/>
+        </StackPanel>
+        <Controls:Banner x:Name="ctrlBanner" Canvas.Bottom="-120"/>
+    </Canvas>
+</Window>

@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Privatix.Controls.DisconnectTimer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:Privatix.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="24" d:DesignWidth="80"
+             Name="disconnectTimer"
+             FontSize="20" >
+    <Grid>
+        <TextBlock x:Name="tbTimerText" Foreground="{Binding ElementName=disconnectTimer, Path=TextColor}" 
+                   FontSize="{Binding ElementName=disconnectTimer, Path=FontSize}" FontFamily="Segoe UI" FontWeight="SemiBold"
+                    IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" LineHeight="21" 
+                    TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ElementName=disconnectTimer, Path=Text}"
+                    VerticalAlignment="Center" Margin="0,0,0,0"/>
+    </Grid>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Controls:DisconnectTimer}">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="Visibility" Value="Hidden" />
+            <Setter Property="IsWorking" Value="False" />
+            <Style.Triggers>
+                <Trigger Property="IsAlarming" Value="True">
+                    <Setter Property="TextColor" Value="Red" />
+                    <Trigger.EnterActions>
+                        <BeginStoryboard  x:Name="TimerPulse">
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" From="20.5" To="18" Duration="0:0:1" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <RemoveStoryboard BeginStoryboardName="TimerPulse"/>
+                    </Trigger.ExitActions>
+                </Trigger>
+                <Trigger Property="IsWorking" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+</UserControl>

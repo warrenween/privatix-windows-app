@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Privatix.Controls.IpAddress"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="385">
+    <StackPanel Background="White">
+        <TextBlock Margin="5,45,5,5" Foreground="Black" FontWeight="Bold" FontSize="30" 
+                   FontFamily="Segoe UI Semibold" IsHyphenationEnabled="True" 
+                   LineStackingStrategy="BlockLineHeight" LineHeight="30" TextAlignment="Center"
+                   TextWrapping="Wrap" Text="IP address details" HorizontalAlignment="Center"/>
+
+        <Grid x:Name="gridShadow" Width="{Binding ElementName=imgIpFlag, Path=ActualWidth}" Margin="5,33,5,5" SnapsToDevicePixels="True">
+            <Border Width="Auto" Height="Auto" BorderBrush="#00000000" BorderThickness=".5" CornerRadius="13">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="7" Opacity=".5" ShadowDepth="3" />
+                </Border.Effect>
+                
+                    <Grid>
+                        <Border Name="Mask" Background="White" BorderBrush="#00000000" BorderThickness=".5" CornerRadius="15" />
+                        <StackPanel>
+                            <StackPanel.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=Mask}" />
+                            </StackPanel.OpacityMask>
+                            <Image x:Name="imgIpFlag" Width="242" MaxHeight="180"  Source="pack://application:,,,/Privatix.Resources;component/big_flags/us.png" />                            
+                        </StackPanel>
+                    </Grid>
+            </Border>
+        </Grid>
+        <TextBlock Margin="5,40,5,5" Foreground="Black" FontSize="18" IsHyphenationEnabled="True"
+                   LineStackingStrategy="BlockLineHeight" LineHeight="24" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"> 
+            <Run x:Name="tbIpLabel" FontWeight="Bold" FontFamily="Segoe UI Semibold" Text="IP: " />
+            <Run x:Name="tbIpAddress"  FontFamily="Segoe UI Light" Text="123.123.123.123" />
+            <Run x:Name="tbCountryLabel" FontWeight="Bold" FontFamily="Segoe UI Semibold" Text="&#xA;COUNTRY: " />
+            <Run x:Name="tbCountry" FontFamily="Segoe UI Light" Text="United States" />
+        </TextBlock>
+        <Button x:Name="btnClickForMore" Width="255" Height="45" Margin="5,25,5,5" Style="{DynamicResource DarkBlueButtonStyle}" Content="Click for more"
+                Click="btnClickForMore_Click"/>
+    </StackPanel>
+</UserControl>

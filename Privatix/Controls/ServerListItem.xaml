@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Privatix.Controls.ServerListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="clr-namespace:Privatix.Controls"
+             mc:Ignorable="d" 
+             x:Name="ControlRoot"
+             d:DesignHeight="50" d:DesignWidth="385">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type Controls:ServerListItem}">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Height" Value="60" />
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Image" Value="pack://application:,,,/Privatix.Resources;component/small_flags/gb.png" />
+                <Setter Property="Text" Value="United Kingdom" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Controls:ServerListItem}">
+                            <Grid x:Name="gridPanel" Background="White" Width="Auto">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Image x:Name="imgFlag" Grid.Row="0" Grid.Column="0" Margin="20,17,5,17" MinHeight="24" MaxHeight="24" Height="24" MaxWidth="36" VerticalAlignment="Center"
+               HorizontalAlignment="Center" Source="{Binding ElementName=ControlRoot, Path=Image}" Stretch="Fill"/>
+                                <TextBlock x:Name="tbCountry" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="15,5,5,5" MaxWidth="285" Foreground="Black" FontSize="23.5" FontFamily="Segoe UI"
+                   IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding ElementName=ControlRoot, Path=Text}" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <Image x:Name="imgMark" Grid.Row="0" Grid.Column="3" Margin="5,5,20,4" Width="24" Height="19" VerticalAlignment="Center"
+               HorizontalAlignment="Right" Source="../res/checkmark.png" Visibility="Hidden" />
+                                <Image x:Name="imgStar" Grid.Row="0" Grid.Column="3" Margin="5,6,20,3" Width="15" Height="16" VerticalAlignment="Center"
+               HorizontalAlignment="Right" Source="../res/star.png" Visibility="Hidden" />
+                                <Line Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Stroke="Black" StrokeThickness="2" SnapsToDevicePixels="True"
+              Opacity="0.149" X1="0" Y1="0" X2="380" Y2="0" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsAvailable" Value="False">
+                                    <Setter Property="Visibility" TargetName="imgStar" Value="Visible" />
+                                    <Setter Property="Opacity" TargetName="tbCountry" Value="0.5" />
+                                    <Setter Property="Opacity" TargetName="imgFlag" Value="0.5" />
+                                    <Setter Property="Foreground" TargetName="tbCountry" Value="#FF404040" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" TargetName="gridPanel" Value="#f7f7f7" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Visibility" TargetName="imgMark" Value="Visible" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    
+
+</UserControl>

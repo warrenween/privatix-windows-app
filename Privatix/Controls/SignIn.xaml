@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Privatix.Controls.SignIn"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:Privatix.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="385">
+    <StackPanel Background="White" UseLayoutRounding="True">
+        <Grid Margin="5,59,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Margin="21,0,5,0" Foreground="Black" FontSize="15" FontFamily="Segoe UI"
+                   IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" LineHeight="15"
+                   TextAlignment="Left" TextWrapping="Wrap" Text="Email"/>
+            <Controls:EmailAvailable x:Name="emailAvailable" Grid.Column="1" Margin="5,0,19,0" Text="This email is not available" 
+                                     HorizontalAlignment="Right" Visibility="Collapsed"/>
+        </Grid>        
+        <TextBox x:Name="tbEmail" Margin="5,1,5,5" Width="336" Height="32" Style="{DynamicResource PrivatixTextBoxStyle}" LostFocus="tbEmail_LostFocus" TextChanged="tbEmail_TextChanged"/>
+        <TextBlock Margin="26,23,5,5" Foreground="Black" FontSize="15" FontFamily="Segoe UI"
+                   IsHyphenationEnabled="True" LineStackingStrategy="BlockLineHeight" LineHeight="15"
+                   TextAlignment="Left" TextWrapping="Wrap" Text="Password"/>
+        <PasswordBox x:Name="pbPassword" Margin="5,1,5,5" Width="336" Height="32" Style="{DynamicResource PrivatixPasswordBoxStyle}"/>
+        <Button x:Name="btnLogin" Margin="5,33,5,5" Width="218" Height="48" Style="{DynamicResource DarkBlueButtonStyle}" Content="Log in" 
+                IsDefault="True" Click="btnLogin_Click" />
+        <Button x:Name="btnForgotPassword" Margin="5,15,5,5" Cursor="Hand" Click="btnForgotPassword_Click" HorizontalAlignment="Center">
+            <Button.Template>
+                <ControlTemplate>
+                    <TextBlock Foreground="#FF007FBB" FontSize="15" FontFamily="Segoe UI" IsHyphenationEnabled="True"
+                               LineStackingStrategy="BlockLineHeight" LineHeight="15" TextWrapping="Wrap" Text="Forgot password?" 
+                               TextDecorations="Underline" />
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="btnLoginFacebook" Margin="5,52,5,5" Width="245" Height="32" Style="{DynamicResource FacebookButtonStyle}"
+                Content="Log in with" Click="btnLoginFacebook_Click" />
+        <Button x:Name="btnLoginGoogle" Margin="5,8,5,5" Width="245" Height="32" Style="{DynamicResource GoogleButtonStyle}"
+                Content="Log in with" Click="btnLoginGoogle_Click" />
+    </StackPanel>
+</UserControl>
